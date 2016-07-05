@@ -30,7 +30,9 @@
         "2amigos/yii2-google-maps-library": "*",
         "miloschuman/yii2-highcharts-widget": "dev-master",
         "bower-asset/jquery": "@stable",
-        "scotthuangzl/yii2-google-chart": "dev-master"
+        "scotthuangzl/yii2-google-chart": "dev-master",
+        "yiisoft/yii2-jui": "~2.0.0",
+        "dixonsatit/yii2-thai-year-formatter": "0.9.6"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

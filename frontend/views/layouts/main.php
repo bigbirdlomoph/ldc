@@ -60,13 +60,13 @@ MaterialAsset::register($this);
     
     //Start Menu group 2
     $rpt_menu_g2[] = ['label' => '<i class="glyphicon glyphicon-unchecked"></i>
-                DMHT', 'url' => ['report/report']];
+                DM Control', 'url' => ['report/dmctrl']];
     $rpt_menu_g2[] = ['label' => '<i class="glyphicon glyphicon-list-alt"></i> 
-                No Regist Chronic', 'url' => ['sqlscript/index']];
+                HT Control', 'url' => ['report/htctrl']];
     $rpt_menu_g2[] = ['label' => '<i class="glyphicon glyphicon-check"></i> 
-                --', 'url' => ['portal-qc/index']];
+                HT Screen 35+', 'url' => ['report/htscramp']];
     $rpt_menu_g2[] = ['label' => '<i class="glyphicon glyphicon-retweet"></i> 
-                --', 'url' => ['runquery/index']];
+                DMHT Screen Kidney', 'url' => ['report/chscrkidneyamp']];
     $rpt_menu_g2[] = ['label' => '<i class="glyphicon glyphicon-floppy-saved"></i> 
                 --', 'url' => ['site/download']];
     //End Menu group 2

@@ -7,24 +7,52 @@ use yii\bootstrap\ActiveForm;
 use yii\helpers\Url;
 use yii\helpers\ArrayHelper;
 
-$this->title = 'DM Control ';
+$this->title = ':: HT Control ::';
 ?>
 
 <div class="col-md-12 col-xs-12" style="margin-top : 60px;">
-    <h4 class="pull-left">ร้อยละผู้ป่วยโรคเบาหวานที่ควบคุมระดับน้ำตาลได้ดี</h4>
+    <h4 class="pull-left">ร้อยละผู้ป่วยโรคความดันโลหิตสูงที่ควบคุมความดันฯ ได้ดี</h4>
         <div class="pull-right">
-            <a class="btn btn-small btn-success" href="<?= yii\helpers\Url::to(['report/report']) ?>">
+            <a class="btn btn-small btn-success" href="<?= yii\helpers\Url::to(['report/htctrl']) ?>">
             กลับ </a>
         </div>
-    
-    <div class="pull-right">
-        <a class="dropdown dropdown-menu-left" href="<?= yii\helpers\Url::to(['report/report']) ?>">
-           select
-        </a>
-    </div>
     <hr>
 </div>
-    
+
+<div class='well well-sm'>
+    <form method="POST">
+        ระหว่าง:
+        <?php
+    //    echo Yii::$app->formatter->asDate(time(), 'short');
+        echo yii\jui\DatePicker::widget([
+            'name' => 'date1',
+            'value' => $date1,
+            'language' => 'th',
+            'dateFormat' => 'dd-MM-yyyy', 
+            'clientOptions' => [
+                'changeMonth' => true,
+                'changeYear' => true,
+     
+            ],
+        ]);
+        ?>
+        ถึง:
+        <?php
+        echo yii\jui\DatePicker::widget([
+            'name' => 'date2',
+            'value' =>  date('Y-m-d'),
+            'language' => 'th',
+            'dateFormat' => 'dd-MM-yyyy',
+            'clientOptions' => [
+                'changeMonth' => true,
+                'changeYear' => true,
+            ]
+        ]);
+        ?>
+        <button class='btn btn-success' href="<?= yii\helpers\Url::to(['report/htctrl']) ?>" type="submit">ประมวลผล</button>
+    </form>
+</div>
+
     <!--Left Page-->
     <div class="col-md-12 col-xs-12">
         <div class="body-content">
@@ -43,6 +71,17 @@ $this->title = 'DM Control ';
                             'options' => ['style' => 'width:10px;'],
                             'class' => 'yii\grid\SerialColumn',
                             'header' => '#'
+                        ],
+                        [
+                            'headerOptions' => ['class' => 'text-center'],
+                            'contentOptions' => ['class' => 'text-left'],
+                            'options' => ['style' => 'width:30px;'],
+                            'attribute' => 'Target',
+                            'header' => 'กลุ่ม',
+                            'format' => 'raw',
+                            'value' => function($data) { 
+                                return empty($data['Target']) ? '-' : $data['Target'];
+                            }
                         ],
                         [
                             'headerOptions' => ['class' => 'text-center'],
@@ -91,70 +130,70 @@ $this->title = 'DM Control ';
                             'headerOptions' => ['class' => 'text-center'],
                             'contentOptions' => ['class' => 'text-center'],
                             'options' => ['style' => 'width:30px;'],
-                            'attribute' => 'rs_hba1c',
-                            'header' => 'ผล HbA1c',
+                            'attribute' => 'rs_bps1',
+                            'header' => 'BPS #1',
                             'value' => function($data) {
-                                return empty($data['rs_hba1c']) ? '-' : $data['rs_hba1c'];
+                                return empty($data['rs_bps1']) ? '-' : $data['rs_bps1'];
                             }
                         ],
                         [
                             'headerOptions' => ['class' => 'text-center'],
                             'contentOptions' => ['class' => 'text-center'],
                             'options' => ['style' => 'width:30px;'],
-                            'attribute' => 'ld_hba1c',
-                            'header' => 'วันที่ตรวจ HbA1c',
+                            'attribute' => 'rs_bpd1',
+                            'header' => 'BPD #1',
                             'value' => function($data) {
-                                return empty($data['ld_hba1c']) ? '-' : $data['ld_hba1c'];
+                                return empty($data['rs_bpd1']) ? '-' : $data['rs_bpd1'];
                             }
                         ],
                         [
                             'headerOptions' => ['class' => 'text-center'],
                             'contentOptions' => ['class' => 'text-center'],
                             'options' => ['style' => 'width:30px;'],
-                            'attribute' => 'rs_fpg1',
-                            'header' => 'ผลน้ำตาล #1',
+                            'attribute' => 'ld_bp1',
+                            'header' => 'วันที่วัด bps/bpd #1',
                             'value' => function($data) {
-                                return empty($data['rs_fpg1']) ? '-' : $data['rs_fpg1'];
+                                return empty($data['ld_bp1']) ? '-' : $data['ld_bp1'];
                             }
                         ],
                         [
                             'headerOptions' => ['class' => 'text-center'],
                             'contentOptions' => ['class' => 'text-center'],
                             'options' => ['style' => 'width:30px;'],
-                            'attribute' => 'ld_fpg1',
-                            'header' => 'วันที่ตรวจ #1',
+                            'attribute' => 'rs_bps2',
+                            'header' => 'BPS #2',
                             'value' => function($data) {
-                                return empty($data['ld_fpg1']) ? '-' : $data['ld_fpg1'];
+                                return empty($data['rs_bps2']) ? '-' : $data['rs_bps2'];
                             }
                         ],
                         [
                             'headerOptions' => ['class' => 'text-center'],
                             'contentOptions' => ['class' => 'text-center'],
                             'options' => ['style' => 'width:30px;'],
-                            'attribute' => 'rs_fpg2',
-                            'header' => 'ผลน้ำตาล #2',
+                            'attribute' => 'rs_bpd2',
+                            'header' => 'BPD #2',
                             'value' => function($data) {
-                                return empty($data['rs_fpg2']) ? '-' : $data['rs_fpg2'];
+                                return empty($data['rs_bpd2']) ? '-' : $data['rs_bpd2'];
                             }
                         ],
                         [
                             'headerOptions' => ['class' => 'text-center'],
                             'contentOptions' => ['class' => 'text-center'],
                             'options' => ['style' => 'width:30px;'],
-                            'attribute' => 'ld_fpg2',
-                            'header' => 'วันที่ตรวจ #2',
+                            'attribute' => 'ld_bp2',
+                            'header' => 'วันที่วัด bps/bpd #2',
                             'value' => function($data) {
-                                return empty($data['ld_fpg2']) ? '-' : $data['ld_fpg2'];
+                                return empty($data['ld_bp2']) ? '-' : $data['ld_bp2'];
                             }
                         ],
                         [
                             'headerOptions' => ['class' => 'text-center'],
                             'contentOptions' => ['class' => 'text-center'],
                             'options' => ['style' => 'width:30px;'],
-                            'attribute' => 'control_dm',
+                            'attribute' => 'control_ht',
                             'header' => 'Ctrl',
                             'value' => function($data) {
-                                return empty($data['control_dm']) ? '-' : $data['control_dm'];
+                                return empty($data['control_ht']) ? '-' : $data['control_ht'];
                             }
                         ]
                          
@@ -162,5 +201,7 @@ $this->title = 'DM Control ';
                 ]);
                 ?>
         </div>
+        <?php print_r($date1); ?>
+        <?php print_r($date2); ?>
     </div>
 
