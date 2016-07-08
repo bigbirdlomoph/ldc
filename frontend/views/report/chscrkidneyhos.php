@@ -58,7 +58,7 @@ $this->title = ':: DMHT Screen Kidney :: ';
                         WHERE id = '0f6df79c2f8887f50d7879b5fe91c080' 
                         AND b_year = '2559' 
                         AND LEFT (areacode, 2) = '42'
-                        AND LEFT (areacode, 4) = '4202'
+                        AND LEFT (areacode, 4) = '$areacode'
                         GROUP BY ar.ar_code";
                 $rawData = Yii::$app->db->createCommand($sql)->queryAll();
                 $main_data=[];
@@ -179,7 +179,7 @@ $this->title = ':: DMHT Screen Kidney :: ';
                                 $areacodehos = Yii::$app->request->post('areacodehos');  
                                 $hosname = Yii::$app->request->post('hosname'); 
                                 $hoscode = Yii::$app->request->post('hoscode');
-                            return Html::a($data['hosname'], ['/report/htscrpid','hoscode' => $data['hoscode'],
+                            return Html::a($data['hosname'], ['/report/chscrkidneypid','hoscode' => $data['hoscode'],
                                 'areacodehos' => $data['areacodehos']]);
                             }
                         ],

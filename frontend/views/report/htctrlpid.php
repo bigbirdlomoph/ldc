@@ -73,8 +73,8 @@ $this->title = ':: HT Control ::';
                             'header' => '#'
                         ],
                         [
-                            'headerOptions' => ['class' => 'text-center'],
-                            'contentOptions' => ['class' => 'text-left'],
+                            'headerOptions' => ['class' => 'text-center success'],
+                            'contentOptions' => ['class' => 'text-center'],
                             'options' => ['style' => 'width:30px;'],
                             'attribute' => 'Target',
                             'header' => 'กลุ่ม',
@@ -84,7 +84,7 @@ $this->title = ':: HT Control ::';
                             }
                         ],
                         [
-                            'headerOptions' => ['class' => 'text-center'],
+                            'headerOptions' => ['class' => 'text-center success'],
                             'contentOptions' => ['class' => 'text-left'],
                             'options' => ['style' => 'width:30px;'],
                             'attribute' => 'hospcode',
@@ -95,7 +95,7 @@ $this->title = ':: HT Control ::';
                             }
                         ],
                         [
-                            'headerOptions' => ['class' => 'text-center'],
+                            'headerOptions' => ['class' => 'text-center success'],
                             'contentOptions' => ['class' => 'text-center'],
                             'options' => ['style' => 'width:20px;'],
                             'attribute' => 'pid',
@@ -106,7 +106,7 @@ $this->title = ':: HT Control ::';
                             }
                         ],
                         [
-                            'headerOptions' => ['class' => 'text-center'],
+                            'headerOptions' => ['class' => 'text-center success'],
                             'contentOptions' => ['class' => 'text-center'],
                             'options' => ['style' => 'width:10px;'],
                             'attribute' => 'age_y',
@@ -117,7 +117,7 @@ $this->title = ':: HT Control ::';
                             }
                         ],
                         [
-                            'headerOptions' => ['class' => 'text-center'],
+                            'headerOptions' => ['class' => 'text-center success'],
                             'contentOptions' => ['class' => 'text-center'],
                             'options' => ['style' => 'width:30px;'],
                             'attribute' => 't_mix_dx',
@@ -127,7 +127,7 @@ $this->title = ':: HT Control ::';
                             }
                         ],
                         [
-                            'headerOptions' => ['class' => 'text-center'],
+                            'headerOptions' => ['class' => 'text-center success'],
                             'contentOptions' => ['class' => 'text-center'],
                             'options' => ['style' => 'width:30px;'],
                             'attribute' => 'rs_bps1',
@@ -137,7 +137,7 @@ $this->title = ':: HT Control ::';
                             }
                         ],
                         [
-                            'headerOptions' => ['class' => 'text-center'],
+                            'headerOptions' => ['class' => 'text-center success'],
                             'contentOptions' => ['class' => 'text-center'],
                             'options' => ['style' => 'width:30px;'],
                             'attribute' => 'rs_bpd1',
@@ -147,7 +147,7 @@ $this->title = ':: HT Control ::';
                             }
                         ],
                         [
-                            'headerOptions' => ['class' => 'text-center'],
+                            'headerOptions' => ['class' => 'text-center success'],
                             'contentOptions' => ['class' => 'text-center'],
                             'options' => ['style' => 'width:30px;'],
                             'attribute' => 'ld_bp1',
@@ -157,7 +157,7 @@ $this->title = ':: HT Control ::';
                             }
                         ],
                         [
-                            'headerOptions' => ['class' => 'text-center'],
+                            'headerOptions' => ['class' => 'text-center success'],
                             'contentOptions' => ['class' => 'text-center'],
                             'options' => ['style' => 'width:30px;'],
                             'attribute' => 'rs_bps2',
@@ -167,7 +167,7 @@ $this->title = ':: HT Control ::';
                             }
                         ],
                         [
-                            'headerOptions' => ['class' => 'text-center'],
+                            'headerOptions' => ['class' => 'text-center success'],
                             'contentOptions' => ['class' => 'text-center'],
                             'options' => ['style' => 'width:30px;'],
                             'attribute' => 'rs_bpd2',
@@ -177,7 +177,7 @@ $this->title = ':: HT Control ::';
                             }
                         ],
                         [
-                            'headerOptions' => ['class' => 'text-center'],
+                            'headerOptions' => ['class' => 'text-center success'],
                             'contentOptions' => ['class' => 'text-center'],
                             'options' => ['style' => 'width:30px;'],
                             'attribute' => 'ld_bp2',
@@ -187,7 +187,7 @@ $this->title = ':: HT Control ::';
                             }
                         ],
                         [
-                            'headerOptions' => ['class' => 'text-center'],
+                            'headerOptions' => ['class' => 'text-center success'],
                             'contentOptions' => ['class' => 'text-center'],
                             'options' => ['style' => 'width:30px;'],
                             'attribute' => 'control_ht',

@@ -13,7 +13,7 @@ $this->title = ':: HT Ctrl Hospital :: ';
 <div class="col-md-12 col-xs-12" style="margin-top : 60px;">
     <h4 class="pull-left">ร้อยละผู้ป่วยโรคความดันโลหิตสูงที่ควบคุมความดันฯ ได้ดี</h4>
             <div class="pull-right">
-            <a class="btn btn-small btn-success" href="<?= yii\helpers\Url::to(['report/report']) ?>">
+            <a class="btn btn-small btn-success" href="<?= yii\helpers\Url::to(['report/htctrl']) ?>">
             กลับ </a>
         </div>
     <hr>
@@ -31,7 +31,7 @@ $this->title = ':: HT Ctrl Hospital :: ';
                 ]);
             ?>
         </div>
-        <div class="col-md-7 col-xs-7">
+        <div class="col-md-12 col-xs-12">
             <div id="charthtctrlhos">
 
                 <?php
@@ -132,8 +132,11 @@ $this->title = ':: HT Ctrl Hospital :: ';
             </div>
             <!--<?php print_r($areacode); ?>-->
     </div>
+    
+    <p> B หมายถึง จำนวนผู้ป่วยโรคความดันโลหิตสูง <br>
+        A หมายถึง จำนวนผู้ป่วยโรคความดันโลหิตสูงที่ควบคุมความดันโลหิตได้ดี</p>
     <!--Left Page-->
-    <div class="col-md-5 col-xs-5">
+    <div class="col-md-12 col-xs-12">
         <div class="body-content">
             <?php
                 if (isset($dataProvider))

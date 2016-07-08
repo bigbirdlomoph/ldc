@@ -9,6 +9,7 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use frontend\assets\MaterialAsset;
+use kartik\icons\Icon;
 
 //AppAsset::register($this);
 MaterialAsset::register($this);
@@ -32,7 +33,7 @@ MaterialAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => '<span class="glyphicon glyphicon-dashboard"></span> LOEI Health Data',
+        'brandLabel' => '<span class="fa fa-database"></span> LHDC',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-fixed-top navbar-custom',
@@ -46,11 +47,11 @@ MaterialAsset::register($this);
     ];
     
     //Start Menu group 1
-    $rpt_menu_g1[] = ['label' => '<i class="glyphicon glyphicon-unchecked"></i>
+    $rpt_menu_g1[] = ['label' => '<i class="fa fa-heartbeat"></i>
                  กลุ่มรายงาน', 'url' => ['report/report']];
-    $rpt_menu_g1[] = ['label' => '<i class="glyphicon glyphicon-list-alt"></i> 
+    $rpt_menu_g1[] = ['label' => '<i class="fa fa-heartbeat"></i> 
                 รายงาน 2', 'url' => ['sqlscript/index']];
-    $rpt_menu_g1[] = ['label' => '<i class="glyphicon glyphicon-check"></i> 
+    $rpt_menu_g1[] = ['label' => '<i class="fa fa-heartbeat"></i> 
                 รายงาน 3', 'url' => ['portal-qc/index']];
     $rpt_menu_g1[] = ['label' => '<i class="glyphicon glyphicon-retweet"></i> 
                 รายงาน 4', 'url' => ['runquery/index']];
@@ -59,15 +60,17 @@ MaterialAsset::register($this);
     //End Menu group 1
     
     //Start Menu group 2
-    $rpt_menu_g2[] = ['label' => '<i class="glyphicon glyphicon-unchecked"></i>
+    $rpt_menu_g2[] = ['label' => '<i class="fa fa-heartbeat"></i> 
                 DM Control', 'url' => ['report/dmctrl']];
-    $rpt_menu_g2[] = ['label' => '<i class="glyphicon glyphicon-list-alt"></i> 
+    $rpt_menu_g2[] = ['label' => '<i class="fa fa-heartbeat"></i> 
                 HT Control', 'url' => ['report/htctrl']];
-    $rpt_menu_g2[] = ['label' => '<i class="glyphicon glyphicon-check"></i> 
+    $rpt_menu_g2[] = ['label' => '<i class="fa fa-heartbeat"></i> 
+                DM Screen 35+', 'url' => ['report/dmscramp']];
+    $rpt_menu_g2[] = ['label' => '<i class="fa fa-heartbeat"></i> 
                 HT Screen 35+', 'url' => ['report/htscramp']];
-    $rpt_menu_g2[] = ['label' => '<i class="glyphicon glyphicon-retweet"></i> 
+    $rpt_menu_g2[] = ['label' => '<i class="fa fa-heartbeat"></i> 
                 DMHT Screen Kidney', 'url' => ['report/chscrkidneyamp']];
-    $rpt_menu_g2[] = ['label' => '<i class="glyphicon glyphicon-floppy-saved"></i> 
+    $rpt_menu_g2[] = ['label' => '<i class="fa fa-heartbeat"></i> 
                 --', 'url' => ['site/download']];
     //End Menu group 2
     
@@ -113,7 +116,7 @@ MaterialAsset::register($this);
     $menuItems = [
         //['label' => 'Home', 'url' => ['/site/index']],
         //['label' => 'กลุ่มวัยที่ 1', 'items' => $rpt_menu_g1],
-        ['label' => 'NCD', 'items' => $rpt_menu_g2],
+        ['label' => '<i class="fa fa-heartbeat"></i> NCD',  'items' => $rpt_menu_g2],
         //['label' => 'กลุ่มวัยที่ 3', 'items' => $rpt_menu_g3],
         //['label' => 'กลุ่มวัยที่ 4', 'items' => $rpt_menu_g4],
         //['label' => 'กลุ่มวัยที่ 5', 'items' => $rpt_menu_g5],

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "38cf8f30b6ed459559f177622019e9c0",
-    "content-hash": "825417f6cbf72dac2c1d8143651a7540",
+    "hash": "7f287ee5277fa9a36f2e4d5545037c73",
+    "content-hash": "bf0c36b85ff1c92cbf532db973b0e5a3",
     "packages": [
         {
             "name": "2amigos/yii2-google-maps-library",
@@ -59,16 +59,16 @@
         },
         {
             "name": "almasaeed2010/adminlte",
-            "version": "v2.3.4",
+            "version": "v2.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/almasaeed2010/AdminLTE.git",
-                "reference": "64a91f7b569cc87de1be5553402576c969a03876"
+                "reference": "0ab2eb7f382e79810ebf3032ce766a02af2b0f3b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/almasaeed2010/AdminLTE/zipball/64a91f7b569cc87de1be5553402576c969a03876",
-                "reference": "64a91f7b569cc87de1be5553402576c969a03876",
+                "url": "https://api.github.com/repos/almasaeed2010/AdminLTE/zipball/0ab2eb7f382e79810ebf3032ce766a02af2b0f3b",
+                "reference": "0ab2eb7f382e79810ebf3032ce766a02af2b0f3b",
                 "shasum": ""
             },
             "type": "library",
@@ -95,7 +95,7 @@
                 "theme",
                 "web"
             ],
-            "time": "2016-07-01 20:36:20"
+            "time": "2016-07-03 15:21:22"
         },
         {
             "name": "bower-asset/bootstrap",
@@ -195,6 +195,43 @@
                 "responsive",
                 "web"
             ]
+        },
+        {
+            "name": "bower-asset/fontawesome",
+            "version": "v4.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FortAwesome/Font-Awesome.git",
+                "reference": "41b9ed01103e6820c3cb043ba7ddab30ecd3f4c0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FortAwesome/Font-Awesome/zipball/41b9ed01103e6820c3cb043ba7ddab30ecd3f4c0",
+                "reference": "41b9ed01103e6820c3cb043ba7ddab30ecd3f4c0",
+                "shasum": ""
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": [
+                    "./css/font-awesome.css",
+                    "./fonts/*"
+                ],
+                "bower-asset-ignore": [
+                    "*/.*",
+                    "*.json",
+                    "src",
+                    "*.yml",
+                    "Gemfile",
+                    "Gemfile.lock",
+                    "*.md"
+                ]
+            },
+            "license": [
+                "OFL-1.1",
+                "MIT",
+                "CC-BY-3.0"
+            ],
+            "description": "Font Awesome"
         },
         {
             "name": "bower-asset/jquery",
@@ -1002,12 +1039,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-grid.git",
-                "reference": "7fa2e27ca021dada177db879ca04f7aab2d73e63"
+                "reference": "0d3cf25ad0ff5aa75d8641af492dee16d9041db1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-grid/zipball/7fa2e27ca021dada177db879ca04f7aab2d73e63",
-                "reference": "7fa2e27ca021dada177db879ca04f7aab2d73e63",
+                "url": "https://api.github.com/repos/kartik-v/yii2-grid/zipball/0d3cf25ad0ff5aa75d8641af492dee16d9041db1",
+                "reference": "0d3cf25ad0ff5aa75d8641af492dee16d9041db1",
                 "shasum": ""
             },
             "require": {
@@ -1044,7 +1081,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-07-01 11:11:25"
+            "time": "2016-07-06 19:34:21"
         },
         {
             "name": "kartik-v/yii2-icons",
@@ -1399,16 +1436,16 @@
         },
         {
             "name": "kartik-v/yii2-widget-datepicker",
-            "version": "v1.4.0",
+            "version": "v1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-widget-datepicker.git",
-                "reference": "b76e08a432950d658cadc7597178426a47a994ac"
+                "reference": "4ccb7262716f405f51720956a453a61a1b48dd53"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-widget-datepicker/zipball/b76e08a432950d658cadc7597178426a47a994ac",
-                "reference": "b76e08a432950d658cadc7597178426a47a994ac",
+                "url": "https://api.github.com/repos/kartik-v/yii2-widget-datepicker/zipball/4ccb7262716f405f51720956a453a61a1b48dd53",
+                "reference": "4ccb7262716f405f51720956a453a61a1b48dd53",
                 "shasum": ""
             },
             "require": {
@@ -1449,7 +1486,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-06-28 17:51:26"
+            "time": "2016-07-01 11:15:25"
         },
         {
             "name": "kartik-v/yii2-widget-datetimepicker",
@@ -2311,19 +2348,20 @@
         },
         {
             "name": "rmrevin/yii2-fontawesome",
-            "version": "2.15.1",
+            "version": "2.10.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rmrevin/yii2-fontawesome.git",
-                "reference": "d2777130bc926bc670a4e50c2f504a0fb782efb1"
+                "reference": "ce4dd62a048090f3d98822d4bc9401bfcdde1f98"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rmrevin/yii2-fontawesome/zipball/d2777130bc926bc670a4e50c2f504a0fb782efb1",
-                "reference": "d2777130bc926bc670a4e50c2f504a0fb782efb1",
+                "url": "https://api.github.com/repos/rmrevin/yii2-fontawesome/zipball/ce4dd62a048090f3d98822d4bc9401bfcdde1f98",
+                "reference": "ce4dd62a048090f3d98822d4bc9401bfcdde1f98",
                 "shasum": ""
             },
             "require": {
+                "bower-asset/fontawesome": "4.3.*",
                 "php": ">=5.4.0",
                 "yiisoft/yii2": "2.0.*"
             },
@@ -2345,9 +2383,9 @@
             ],
             "authors": [
                 {
-                    "name": "Revin Roman",
-                    "email": "roman@rmrevin.com",
-                    "homepage": "https://rmrevin.com/"
+                    "name": "Roman Revin",
+                    "email": "xgismox@gmail.com",
+                    "homepage": "http://rmrevin.ru/"
                 }
             ],
             "description": "Asset Bundle for Yii2 with Font Awesome",
@@ -2358,7 +2396,7 @@
                 "font",
                 "yii"
             ],
-            "time": "2016-05-28 21:18:32"
+            "time": "2015-06-23 13:06:14"
         },
         {
             "name": "scotthuangzl/yii2-google-chart",

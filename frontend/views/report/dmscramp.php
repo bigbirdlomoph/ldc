@@ -7,14 +7,14 @@ use yii\bootstrap\ActiveForm;
 use yii\helpers\Url;
 use yii\helpers\ArrayHelper;
 
-$this->title = ':: HT Screen ::';
+$this->title = ':: DM Screen ::';
 ?>
 <div class="col-md-12 col-xs-12" style="margin-top : 80px;">
-    <h4 class="pull-left">การคัดกรองความดันโลหิตสูง ในประชากรไทย อายุ 35 ปีขึ้นไป</h4>
+    <h4 class="pull-left">การคัดกรองเบาหวานในประชากรไทย อายุ 35 ปีขึ้นไป</h4>
        <div class="pull-right">      
         <?php $form = ActiveForm::begin([
                 'id' => 'active-form',
-                'action' => ['report/htscramp'],
+                'action' => ['report/dmscramp'],
                 'options' => [
                     'layout' => 'inline'
                 ],
@@ -26,12 +26,12 @@ $this->title = ':: HT Screen ::';
               <span class="sr-only">Toggle Dropdown</span>
             </button>
             <ul class="dropdown-menu">
-              <li><a href="<?= yii\helpers\Url::to(['report/htscramp','budget'=>2558]) ?>" type="submit">2558</a></li>
-              <li><a href="<?= yii\helpers\Url::to(['report/htscramp','budget'=>2559]) ?>" type="submit">2559</a></li>
-              <li><a href="<?= yii\helpers\Url::to(['report/htscramp','budget'=>2560]) ?>" type="submit">2560</a></li>
+              <li><a href="<?= yii\helpers\Url::to(['report/dmscramp','budget'=>2558]) ?>" type="submit">2558</a></li>
+              <li><a href="<?= yii\helpers\Url::to(['report/dmscramp','budget'=>2559]) ?>" type="submit">2559</a></li>
+              <li><a href="<?= yii\helpers\Url::to(['report/dmscramp','budget'=>2560]) ?>" type="submit">2560</a></li>
             </ul>
         </div>
-        <a class="btn btn-small btn-success" href="<?= yii\helpers\Url::to(['report/htscramp']) ?>">
+        <a class="btn btn-small btn-success" href="<?= yii\helpers\Url::to(['report/dmscramp']) ?>">
         กลับ </a>
         </div>
         <?php ActiveForm::end(); ?>

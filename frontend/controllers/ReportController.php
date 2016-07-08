@@ -11,32 +11,52 @@ class ReportController extends Controller
     //put your code here
     
     //function ตารางแสดงข้อมูลตัวชี้วัด DM
-    public function actionDmctrl()
+    public function actionDmctrl($budget=0)
     {
-        $sql = "SELECT
+        if ($budget == NULL) {
+                $sql = "SELECT
                         ar_code AS areacode,
                         ar_name AS areaname,
                         sum(target) AS target,
                         sum(result) AS result,
                         ROUND((sum(result) / sum(target)) * 100,2) AS p
-                FROM s_dm_control
-                LEFT JOIN (
+                    FROM s_dm_control
+                    LEFT JOIN (
                         SELECT
-                                ampurcodefull AS ar_code,
-                                ampurname AS ar_name,
-                                ampurcodefull AS l_code
-                        FROM
-                                campur
-                        GROUP BY
-                                l_code
-                        ORDER BY
-                                l_code
-                ) AS ar ON LEFT (s_dm_control.areacode, 4) = ar.l_code
-                WHERE
-                        id = '137a726340e4dfde7bbbc5d8aeee3ac3'
-                AND b_year = '2559'
-                AND LEFT (areacode, 2) = '42'
-                GROUP BY ar_code";
+                        ampurcodefull AS ar_code,
+                        ampurname AS ar_name,
+                        ampurcodefull AS l_code
+                        FROM  campur
+                        GROUP BY  l_code
+                        ORDER BY  l_code
+                    ) AS ar ON LEFT (s_dm_control.areacode, 4) = ar.l_code
+                    WHERE id = '137a726340e4dfde7bbbc5d8aeee3ac3'
+                    AND b_year = '2559'
+                    AND LEFT (areacode, 2) = '42'
+                    GROUP BY ar_code";
+		}else{
+			        
+                $sql = "SELECT
+                        ar_code AS areacode,
+                        ar_name AS areaname,
+                        sum(target) AS target,
+                        sum(result) AS result,
+                        ROUND((sum(result) / sum(target)) * 100,2) AS p
+                    FROM s_dm_control
+                    LEFT JOIN (
+                        SELECT
+                        ampurcodefull AS ar_code,
+                        ampurname AS ar_name,
+                        ampurcodefull AS l_code
+                        FROM  campur
+                        GROUP BY  l_code
+                        ORDER BY  l_code
+                    ) AS ar ON LEFT (s_dm_control.areacode, 4) = ar.l_code
+                    WHERE id = '137a726340e4dfde7bbbc5d8aeee3ac3'
+                    AND b_year = '$budget'
+                    AND LEFT (areacode, 2) = '42'
+                    GROUP BY ar_code";
+                }
         $areacode = Yii::$app->request->post('areacode');  
         $areaname = Yii::$app->request->post('areaname');  
         
@@ -114,6 +134,13 @@ class ReportController extends Controller
     //func ตาราง แสดงข้อมูล แยกรายบุคคล
     public function actionDmctrlpid($hoscode,$areacodehos)
     {
+        $date1 = date('Y-m-d'); //"2014-10-01";
+        $date2 = date('Y-m-d');
+        
+        if (Yii::$app->request->isPost) {
+            $date1 = date('Y-m-d', strtotime($_POST['date1']));
+            $date2 = date('Y-m-d', strtotime($_POST['date2']));
+    }
         
         $sql = "SELECT  'Target',
                         d.hospcode, d.pid, d.age_y, d.typearea, d.groupname1560,
@@ -126,7 +153,8 @@ class ReportController extends Controller
                 FROM t_dmht d
                 WHERE type_dx in('02','03')
                     AND LEFT(d.vhid,6)='$areacodehos'
-                    AND d.hospcode='$hoscode'";
+                    AND d.hospcode='$hoscode' 
+                    ORDER BY d.control_dm DESC";
             $hoscode = Yii::$app->request->post('hoscode');
             $areacodehos = Yii::$app->request->post('areacodehos');
         
@@ -147,6 +175,8 @@ class ReportController extends Controller
             'dataProvider' => $dataProvider,
             'hoscode' => $hoscode,
             'sql' =>  $sql,
+            'date1' => $date1,
+            'date2' => $date2
         ]);
     }
     //End func ตาราง แสดงข้อมูล แยกรายบุคคล
@@ -329,8 +359,30 @@ class ReportController extends Controller
     //End func ตาราง แสดงข้อมูล แยกรายบุคคล
     
     //ht Screen 35year up Amp
-    public function actionHtscramp() {
+    public function actionHtscramp($budget=0) {
         
+        if ($budget == NULL) {
+            $sql = "SELECT 
+                ar_code as areacode,ar_name as areaname 
+                ,SUM(result_group2) as result2 ,SUM(result_group3) as result3 ,SUM(result_group4) as result4 
+                ,SUM(pop_group2) as target2 ,SUM(pop_group3) as target3 ,SUM(pop_group4) as target4
+                ,ROUND(((SUM(result_group2)) /(SUM(pop_group2)) *100),2) as p2
+                ,ROUND(((SUM(result_group3)) /(SUM(pop_group3)) *100),2) as p3
+                ,ROUND(((SUM(result_group4)) /(SUM(pop_group4)) *100),2) as p4 
+                FROM s_ht_screen_pop_age 
+                LEFT JOIN ( 
+                            SELECT 
+                            ampurcodefull as ar_code,ampurname as ar_name,ampurcodefull as l_code 
+                            FROM campur 
+                            GROUP BY l_code 
+                            ORDER BY l_code 
+                ) as ar ON left(s_ht_screen_pop_age.areacode,4)=ar.l_code
+                WHERE id = '68e401815a64e624c286d97ef3582aa3' 
+                AND b_year = '2559' 
+                AND left(areacode,2)='42' 
+                GROUP BY ar_code";
+		}else{
+			        
         $sql = "SELECT 
                 ar_code as areacode,ar_name as areaname 
                 ,SUM(result_group2) as result2 ,SUM(result_group3) as result3 ,SUM(result_group4) as result4 
@@ -343,15 +395,17 @@ class ReportController extends Controller
                             SELECT 
                             ampurcodefull as ar_code,ampurname as ar_name,ampurcodefull as l_code 
                             FROM campur 
-                            GROUP BY l_code	
+                            GROUP BY l_code 
                             ORDER BY l_code 
                 ) as ar ON left(s_ht_screen_pop_age.areacode,4)=ar.l_code
                 WHERE id = '68e401815a64e624c286d97ef3582aa3' 
-                AND b_year = '2559' 
+                AND b_year = '$budget' 
                 AND left(areacode,2)='42' 
                 GROUP BY ar_code";
+                }
         $areacode = Yii::$app->request->post('areacode');  
-        $areaname = Yii::$app->request->post('areaname');  
+        $areaname = Yii::$app->request->post('areaname'); 
+        $budget = Yii::$app->request->post('budget');
         
         try {
             $rawData = \Yii::$app->db->createCommand($sql)->queryAll();
@@ -469,41 +523,37 @@ class ReportController extends Controller
     //End func ตาราง แสดงข้อมูล แยกรายบุคคล
     
     //DMHT Screen Kidney Amp
-    public function actionChscrkidneyamp() {
-        $budget= NULL;
-        if (Yii::$app->request->isPost) {
-            $budget = $_POST['budget'];
-        }
-        
+    public function actionChscrkidneyamp($budget=0) {
+                
          if ($budget == NULL) {
             $sql = "SELECT 
-                ar_code as areacode
-                ,ar_name as areaname 
-                ,SUM(target) as target 
-                ,SUM(result) as result
-                ,FORMAT(((SUM(result))/(SUM(target)))*100,2)AS p
-                ,SUM(result1) as resultq1
-                ,FORMAT(((SUM(result1))/(SUM(target)))*100,2)AS pq1
-                ,SUM(result2) as resultq2
-                ,FORMAT(((SUM(result2))/(SUM(target)))*100,2)AS pq2
-                ,SUM(result3) as resultq3
-                ,FORMAT(((SUM(result3))/(SUM(target)))*100,2)AS pq3
-                ,SUM(result4) as resultq4 
-                ,FORMAT(((SUM(result4))/(SUM(target)))*100,2)AS pq4
-                FROM s_kpi_ckd_screen 
-                LEFT JOIN ( 
-                SELECT	
-                ampurcodefull as ar_code, 
-                ampurname as ar_name, 
-                ampurcodefull as l_code 
-                FROM campur 
-                GROUP BY l_code	
-                ORDER BY l_code 
-                ) as ar ON left(s_kpi_ckd_screen.areacode,4)=ar.l_code
-                WHERE id = '0f6df79c2f8887f50d7879b5fe91c080' 
-                AND b_year = '2559' 
-                AND left(areacode,2)='42' 
-                GROUP BY ar_code";
+                    ar_code as areacode
+                    ,ar_name as areaname 
+                    ,SUM(target) as target 
+                    ,SUM(result) as result
+                    ,FORMAT(((SUM(result))/(SUM(target)))*100,2)AS p
+                    ,SUM(result1) as resultq1
+                    ,FORMAT(((SUM(result1))/(SUM(target)))*100,2)AS pq1
+                    ,SUM(result2) as resultq2
+                    ,FORMAT(((SUM(result2))/(SUM(target)))*100,2)AS pq2
+                    ,SUM(result3) as resultq3
+                    ,FORMAT(((SUM(result3))/(SUM(target)))*100,2)AS pq3
+                    ,SUM(result4) as resultq4 
+                    ,FORMAT(((SUM(result4))/(SUM(target)))*100,2)AS pq4
+                    FROM s_kpi_ckd_screen 
+                    LEFT JOIN ( 
+                    SELECT	
+                    ampurcodefull as ar_code, 
+                    ampurname as ar_name, 
+                    ampurcodefull as l_code 
+                    FROM campur 
+                    GROUP BY l_code	
+                    ORDER BY l_code 
+                    ) as ar ON left(s_kpi_ckd_screen.areacode,4)=ar.l_code
+                    WHERE id = '0f6df79c2f8887f50d7879b5fe91c080' 
+                    AND b_year = '2559' 
+                    AND left(areacode,2)='42' 
+                    GROUP BY ar_code";
 		}else{
 			        
         $sql = "SELECT 
@@ -530,14 +580,14 @@ class ReportController extends Controller
                 GROUP BY l_code	
                 ORDER BY l_code 
                 ) as ar ON left(s_kpi_ckd_screen.areacode,4)=ar.l_code
-
                 WHERE id = '0f6df79c2f8887f50d7879b5fe91c080' 
                 AND b_year = '$budget' 
                 AND left(areacode,2)='42' 
                 GROUP BY ar_code";
                 }
         $areacode = Yii::$app->request->post('areacode');  
-        $areaname = Yii::$app->request->post('areaname');  
+        $areaname = Yii::$app->request->post('areaname');
+        $budget = Yii::$app->request->post('budget');  
         
         try {
             $rawData = \Yii::$app->db->createCommand($sql)->queryAll();
@@ -555,6 +605,7 @@ class ReportController extends Controller
         return $this->render('chscrkidneyamp',[
             'dataProvider' => $dataProvider,
             'sql' => $sql,
+            'budget' => $budget,
         ]);
     }
     //end function ตารางแสดงข้อมูลตัวชี้วัด DMHT Screen Kidney
@@ -562,7 +613,6 @@ class ReportController extends Controller
     //func ตาราง แสดงข้อมูล แยกราย รพ. DMHT Screen Kidney
     public function actionChscrkidneyhos($areacode)
     {
-        
         $sql = "SELECT ar_code AS areacodehos,
                         hosname, hoscode
                         ,SUM(target) as target 
@@ -616,5 +666,133 @@ class ReportController extends Controller
         ]);
     }
     //End func ตาราง แสดงข้อมูล DMHT Screen Kidney แยกราย รพ.
+    
+    //func ตาราง แสดงข้อมูล DMHT Screen Kidney แยกรายบุคคล
+    public function actionChscrkidneypid($hoscode,$areacodehos)
+    {
+        $date1 = date('Y-m-d'); //"2014-10-01";
+        $date2 = date('Y-m-d');
+        
+        if (Yii::$app->request->isPost) {
+            $date1 = date('Y-m-d', strtotime($_POST['date1']));
+            $date2 = date('Y-m-d', strtotime($_POST['date2']));
+            
+    }
+        $sql = "SELECT 
+                t.hospcode, t.pid, t.typearea, t.age_y, t.sex, t.mix_dx, t.date_dx, t.hosp_dx, 
+                t.minlab_date, t.lab11_result, t.lab11_date, t.lab11_hosp,
+                t.lab12_result, t.lab12_date, t.lab12_hosp,
+                t.lab14_result, t.lab14_date, t.lab14_hosp,
+                t.lab15_result, t.lab15_date, t.lab15_hosp,
+                t.lab15_ok_result,IF(t.minlab_date IS NOT NULL,'result',t.minlab_date)AS result
+                FROM t_ckd_screen t
+                WHERE t.hospcode='$hoscode'
+                AND LEFT(t.vhid,6)='$areacodehos'
+                ORDER BY minlab_date DESC";
+            $hoscode = Yii::$app->request->post('hoscode');
+            $areacodehos = Yii::$app->request->post('areacodehos');
+        
+        try {
+            $rawData = \Yii::$app->db->createCommand($sql)->queryAll();
+        } catch (\yii\db\Exception $e) {
+            throw new \yii\web\ConflictHttpException('sql error');
+        }
+        $dataProvider = new \yii\data\ArrayDataProvider([
+            'allModels' => $rawData,
+            'pagination' => FALSE,
+                'pagination' => [
+                    'pageSize' => 20,
+                ],
+        ]);
+        
+        return $this->render('chscrkidneypid',[
+            'dataProvider' => $dataProvider,
+            'hoscode' => $hoscode,
+            'sql' =>  $sql,
+            'date1' => $date1,
+            'date2' => $date2
+            
+        ]);
+    }
+    //End func ตาราง แสดงข้อมูล DMHT Screen Kidney แยกรายบุคคล
+    
+    //DM Screen 35year up Amp
+    public function actionDmscramp($budget=0) {
+        
+        if ($budget == NULL) {
+            $sql = "SELECT ar_code as areacode,ar_name as areaname 
+                    ,SUM(result_group2) as result2 
+                    ,SUM(result_group3) as result3 
+                    ,SUM(result_group4) as result4 
+                    ,SUM(pop_group2) as target2 
+                    ,SUM(pop_group3) as target3 
+                    ,SUM(pop_group4) as target4
+                    ,ROUND(((SUM(result_group2)) /(SUM(pop_group2)) *100),2) as p2
+                    ,ROUND(((SUM(result_group3)) /(SUM(pop_group3)) *100),2) as p3
+                    ,ROUND(((SUM(result_group4)) /(SUM(pop_group4)) *100),2) as p4 
+                    FROM s_dm_screen_pop_age 
+                    LEFT JOIN ( 
+                            SELECT	
+                            ampurcodefull as ar_code,
+                            ampurname as ar_name,
+                            ampurcodefull as l_code 
+                            FROM campur 
+                            GROUP BY l_code	
+                            ORDER BY l_code 
+                    ) as ar ON left(s_dm_screen_pop_age.areacode,4)=ar.l_code
+                    WHERE id = '150edaa99ecbe538378b8150e0776763' 
+                    AND b_year = '2559' 
+                    AND left(areacode,2)='42' 
+                    GROUP BY ar_code";
+		}else{
+			        
+        $sql = "SELECT ar_code as areacode,ar_name as areaname 
+                    ,SUM(result_group2) as result2 
+                    ,SUM(result_group3) as result3 
+                    ,SUM(result_group4) as result4 
+                    ,SUM(pop_group2) as target2 
+                    ,SUM(pop_group3) as target3 
+                    ,SUM(pop_group4) as target4
+                    ,ROUND(((SUM(result_group2)) /(SUM(pop_group2)) *100),2) as p2
+                    ,ROUND(((SUM(result_group3)) /(SUM(pop_group3)) *100),2) as p3
+                    ,ROUND(((SUM(result_group4)) /(SUM(pop_group4)) *100),2) as p4 
+                    FROM s_dm_screen_pop_age 
+                    LEFT JOIN ( 
+                            SELECT	
+                            ampurcodefull as ar_code,
+                            ampurname as ar_name,
+                            ampurcodefull as l_code 
+                            FROM campur 
+                            GROUP BY l_code	
+                            ORDER BY l_code 
+                    ) as ar ON left(s_dm_screen_pop_age.areacode,4)=ar.l_code
+                    WHERE id = '150edaa99ecbe538378b8150e0776763' 
+                    AND b_year = '$budget' 
+                    AND left(areacode,2)='42' 
+                    GROUP BY ar_code";
+                }
+        $areacode = Yii::$app->request->post('areacode');  
+        $areaname = Yii::$app->request->post('areaname'); 
+        $budget = Yii::$app->request->post('budget');
+        
+        try {
+            $rawData = \Yii::$app->db->createCommand($sql)->queryAll();
+        } catch (\yii\db\Exception $e) {
+            throw new \yii\web\ConflictHttpException('sql error');
+        }
+        $dataProvider = new \yii\data\ArrayDataProvider([
+            'allModels' => $rawData,
+            'pagination' => FALSE,
+                'pagination' => [
+                    'pageSize' => 15,
+                ],
+        ]);
+        
+        return $this->render('dmscramp',[
+            'dataProvider' => $dataProvider,
+            'sql' => $sql,
+        ]);
+    }
+    //end function ตารางแสดงข้อมูลตัวชี้วัด DM Screen
     
 }

@@ -31,7 +31,7 @@ $this->title = 'DM Control ';
                 ]);
             ?>
         </div>
-        <div class="col-md-7 col-xs-7">
+        <div class="col-md-12 col-xs-12">
             <div id="chartdmcontrol">
 
                 <?php
@@ -131,8 +131,10 @@ $this->title = 'DM Control ';
             </div>
             <!--<?php print_r($areacode); ?>-->
     </div>
+        <p> B หมายถึง จำนวนผู้ป่วยโรคเบาหวาน <br>
+        A หมายถึง จำนวนผู้ป่วยโรคเบาหวานที่ควบคุมระดับน้ำตาลได้ดี</p>
     <!--Left Page-->
-    <div class="col-md-5 col-xs-5">
+    <div class="col-md-12 col-xs-12">
         <div class="body-content">
             <?php
                 if (isset($dataProvider))

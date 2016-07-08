@@ -13,7 +13,7 @@ $this->title = ':: DMHT Screen Kidney ::';
 <div class="col-md-12 col-xs-12" style="margin-top : 60px;">
     <h4 class="pull-left">ร้อยละของผู้ป่วย DM, HT ที่ได้รับการค้นหาและคัดกรองโรคไตเรื้อรัง</h4>
         <div class="pull-right">
-            <a class="btn btn-small btn-success" href="<?= yii\helpers\Url::to(['report/htscramp']) ?>">
+            <a class="btn btn-small btn-success" href="<?= yii\helpers\Url::to(['report/chscrkidneyamp']) ?>">
             กลับ </a>
         </div>
     <hr>
@@ -32,10 +32,8 @@ $this->title = ':: DMHT Screen Kidney ::';
             'clientOptions' => [
                 'changeMonth' => true,
                 'changeYear' => true,
-     
-            ],
-        ]);
-        ?>
+                ],
+        ]);?>
         ถึง:
         <?php
         echo yii\jui\DatePicker::widget([
@@ -46,10 +44,10 @@ $this->title = ':: DMHT Screen Kidney ::';
             'clientOptions' => [
                 'changeMonth' => true,
                 'changeYear' => true,
-            ]
+                ]
         ]);
         ?>
-        <button class='btn btn-success' href="<?= yii\helpers\Url::to(['report/htctrl']) ?>" type="submit">ประมวลผล</button>
+        <button class='btn btn-success' href="<?= yii\helpers\Url::to(['report/chscrkidneyhos']) ?>" type="submit">ประมวลผล</button>
     </form>
 </div>
 
@@ -58,7 +56,6 @@ $this->title = ':: DMHT Screen Kidney ::';
         <div class="body-content">
             <?php
                 if (isset($dataProvider))
-                                
                 echo GridView::widget([
                     'dataProvider' => $dataProvider,
                     'hover' => TRUE,
@@ -74,8 +71,8 @@ $this->title = ':: DMHT Screen Kidney ::';
                         ],
                         [
                             'headerOptions' => ['class' => 'text-center success'],
-                            'contentOptions' => ['class' => 'text-left'],
-                            'options' => ['style' => 'width:30px;'],
+                            'contentOptions' => ['class' => 'text-center'],
+                            'options' => ['style' => 'width:20px;'],
                             'attribute' => 'hospcode',
                             'header' => 'รหัสสถานพยาบาล',
                             'format' => 'raw',
@@ -86,7 +83,7 @@ $this->title = ':: DMHT Screen Kidney ::';
                         [
                             'headerOptions' => ['class' => 'text-center success'],
                             'contentOptions' => ['class' => 'text-center'],
-                            'options' => ['style' => 'width:20px;'],
+                            //'options' => ['style' => 'width:20px;'],
                             'attribute' => 'pid',
                             'header' => 'PID',
                             'format'=>'raw',
@@ -97,7 +94,7 @@ $this->title = ':: DMHT Screen Kidney ::';
                         [
                             'headerOptions' => ['class' => 'text-center success'],
                             'contentOptions' => ['class' => 'text-center'],
-                            'options' => ['style' => 'width:10px;'],
+                            //'options' => ['style' => 'width:10px;'],
                             'attribute' => 'age_y',
                             'header' => 'อายุ',
                             'format'=>'raw',
@@ -108,88 +105,110 @@ $this->title = ':: DMHT Screen Kidney ::';
                         [
                             'headerOptions' => ['class' => 'text-center success'],
                             'contentOptions' => ['class' => 'text-center'],
-                            'options' => ['style' => 'width:30px;'],
-                            'attribute' => 'date_screen',
-                            'header' => 'วันที่คัดกรอง',
+                            //'options' => ['style' => 'width:10px;'],
+                            'attribute' => 'sex',
+                            'header' => 'เพศ',
                             'value' => function($data) {
-                                return empty($data['date_screen']) ? '-' : $data['date_screen'];
+                                return empty($data['sex']) ? '-' : $data['sex'];
                             }
                         ],
                         [
                             'headerOptions' => ['class' => 'text-center success'],
                             'contentOptions' => ['class' => 'text-center'],
-                            'options' => ['style' => 'width:30px;'],
-                            'attribute' => 'sbp',
-                            'header' => 'SBP',
+                            //'options' => ['style' => 'width: 30px;'],
+                            'attribute' => 'mix_dx',
+                            'header' => 'Diag',
                             'value' => function($data) {
-                                return empty($data['sbp']) ? '-' : $data['sbp'];
+                                return empty($data['mix_dx']) ? '-' : $data['mix_dx'];
                             }
                         ],
                         [
                             'headerOptions' => ['class' => 'text-center success'],
                             'contentOptions' => ['class' => 'text-center'],
-                            'options' => ['style' => 'width:30px;'],
-                            'attribute' => 'dbp',
-                            'header' => 'DBP',
+                            //'options' => ['style' => 'width:50px;'],
+                            'attribute' => 'minlab_date',
+                            'header' => 'วันที่ตรวจ LAB ครั้งแรก',
                             'value' => function($data) {
-                                return empty($data['dbp']) ? '-' : $data['dbp'];
+                                return empty($data['minlab_date']) ? '-' : $data['minlab_date'];
+                            }
+                        ],
+                        [
+                            'headerOptions' => ['class' => 'text-center info'],
+                            'contentOptions' => ['class' => 'text-center'],
+                            //'options' => ['style' => 'width:30px;'],
+                            'attribute' => 'lab11_result',
+                            'header' => 'ผล Cretinine',
+                            'value' => function($data) {
+                                return empty($data['lab11_result']) ? '-' : $data['lab11_result'];
+                            }
+                        ],
+                        [
+                            'headerOptions' => ['class' => 'text-center info'],
+                            'contentOptions' => ['class' => 'text-center'],
+                            //'options' => ['style' => 'width:30px;'],
+                            'attribute' => 'lab11_date',
+                            'header' => 'วันที่ตรวจ Cretinine',
+                            'value' => function($data) {
+                                return empty($data['lab11_date']) ? '-' : $data['lab11_date'];
+                            }
+                        ],
+                        [
+                            'headerOptions' => ['class' => 'text-center info'],
+                            'contentOptions' => ['class' => 'text-center'],
+                            //'options' => ['style' => 'width:30px;'],
+                            'attribute' => 'lab11_hosp',
+                            'header' => 'รพ. ที่ตรวจ LAB',
+                            'value' => function($data) {
+                                return empty($data['lab11_hosp']) ? '-' : $data['lab11_hosp'];
                             }
                         ],
                         [
                             'headerOptions' => ['class' => 'text-center success'],
                             'contentOptions' => ['class' => 'text-center'],
-                            'options' => ['style' => 'width:30px;'],
-                            'attribute' => 'sbp_1',
-                            'header' => 'SBP #1',
+                            //'options' => ['style' => 'width:30px;'],
+                            'attribute' => 'lab15_result',
+                            'header' => 'eGFR (ใช้สูตร CKD-EPI formula)',
                             'value' => function($data) {
-                                return empty($data['sbp_1']) ? '-' : $data['sbp_1'];
+                                return empty($data['lab15_result']) ? '-' : $data['lab15_result'];
                             }
                         ],
                         [
                             'headerOptions' => ['class' => 'text-center success'],
                             'contentOptions' => ['class' => 'text-center'],
-                            'options' => ['style' => 'width:30px;'],
-                            'attribute' => 'dbp_1',
-                            'header' => 'DBP #1',
+                            //'options' => ['style' => 'width:30px;'],
+                            'attribute' => 'lab15_date',
+                            'header' => 'วันที่ตรวจ microalbumin',
                             'value' => function($data) {
-                                return empty($data['dbp_1']) ? '-' : $data['dbp_1'];
+                                return empty($data['lab15_date']) ? '-' : $data['lab15_date'];
                             }
                         ],
                         [
                             'headerOptions' => ['class' => 'text-center success'],
                             'contentOptions' => ['class' => 'text-center'],
-                            'options' => ['style' => 'width:30px;'],
-                            'attribute' => 'sbp_2',
-                            'header' => 'SBP #2',
+                            //'options' => ['style' => 'width:30px;'],
+                            'attribute' => 'lab15_hosp',
+                            'header' => 'รพ. ที่ตรวจ LAB',
                             'value' => function($data) {
-                                return empty($data['sbp_2']) ? '-' : $data['sbp_2'];
+                                return empty($data['lab15_hosp']) ? '-' : $data['lab15_hosp'];
                             }
                         ],
-                        [
-                            'headerOptions' => ['class' => 'text-center success'],
-                            'contentOptions' => ['class' => 'text-center'],
-                            'options' => ['style' => 'width:30px;'],
-                            'attribute' => 'dbp_2',
-                            'header' => 'DBP #2',
-                            'value' => function($data) {
-                                return empty($data['dbp_2']) ? '-' : $data['dbp_2'];
-                            }
-                        ],
-                        [
-                            'headerOptions' => ['class' => 'text-center warning'],
-                            'contentOptions' => ['class' => 'text-center'],
-                            'options' => ['style' => 'width:30px;'],
-                            'attribute' => 'risk',
-                            'header' => 'กลุ่มเสี่ยง',
-                            'value' => function($data) {
-                                return empty($data['risk']) ? '-' : $data['risk'];
-                            }
-                        ]
-                         
                     ]
                 ]);
                 ?>
         </div>
+        <p>    หมายเหตุ :: <br>
+                B = ผู้ป่วยโรคเบาหวานและหรือความดันโลหิตสูงสัญชาติไทย ในเขตรับผิดชอบที่ไม่มีภาวะแทรกซ้อนทางไต<br>
+                <br>
+                   ประมวลผลจาก ผู้ป่วยรหัสโรคเป็น (E10* ถึง E14*) ลบออกด้วย (E102, E112, E122, E132, E142) <br>
+                และ/หรือ มีรหัสโรคเป็น (I10* ถึง I15*) ลบออกด้วย (I12*, I13*,I151) และไม่มีรหัสโรค N181-189 <br>
+                ******ผู้ป่วยที่มีภาวะแทรกซ้อนก่อนปีงบประมาณปัจจุบัน จึงจะนำมาหักออกเท่านั้น<br>
+                <br>
+                A = ผู้ป่วยตาม B ที่ได้รับการตรวจคัดกรอง คือ ตรวจ LABTEST12 หรือ LABTEST14 หรือ LABTEST11 หรือ LABTEST15<br>
+                <br>
+                โดยประเมินจากวันที่ตรวจในปีงบประมาณเท่านั้น (ไม่ดูผลการตรวจ)<br>
+                *******หากมีการตรวจ LAB มากกว่าหนึ่งรายการ จะนับเป็นผลงานในไตรมาสที่วันที่ตรวจน้อยที่สุดเพียงครั้งเดียวเท่านั้น<br>
+
+                +++ใช้แฟ้ม Chronic,Diagnosis_OPD ,Diagnosis_IPD,LABFU , Person และ Home ประมวลผล) </p>
         <?php print_r($date1); ?>
         <?php print_r($date2); ?>
     </div>

@@ -19,7 +19,7 @@ $this->title = ':: DMHT Screen Kidney ::';
                     'layout' => 'inline'
                 ],
             ]); ?>
-        <div class="btn-group" method="POST">
+        <div class="btn-group" name="budget" method="POST">
             <button type="button" class="btn btn-small btn-success">เลือกปีงบประมาณ</button>
             <button type="button" class="btn btn-small btn-success dropdown-toggle" data-toggle="dropdown" 
                     aria-haspopup="false" aria-expanded="true">
@@ -27,43 +27,16 @@ $this->title = ':: DMHT Screen Kidney ::';
               <span class="sr-only">Toggle Dropdown</span>
             </button>
             <ul class="dropdown-menu">
-              <li><a name="budget" value="2558" href="<?= yii\helpers\Url::to(['report/chscrkidneyamp']) ?>" type="submit">2558</a></li>
-              <li><a name="budget" value="2559" href="<?= yii\helpers\Url::to(['report/chscrkidneyamp']) ?>" type="submit">2559</a></li>
-              <li><a name="budget" value="2560" href="<?= yii\helpers\Url::to(['report/chscrkidneyamp']) ?>" type="submit">2560</a></li>
+              <li><a href="<?= yii\helpers\Url::to(['report/chscrkidneyamp','budget'=>2558]) ?>" type="submit">2558</a></li>
+              <li><a href="<?= yii\helpers\Url::to(['report/chscrkidneyamp','budget'=>2559]) ?>" type="submit">2559</a></li>
+              <li><a href="<?= yii\helpers\Url::to(['report/chscrkidneyamp','budget'=>2560]) ?>" type="submit">2560</a></li>
             </ul>
         </div>
             <a class="btn btn-small btn-success" href="<?= yii\helpers\Url::to(['report/chscrkidneyamp']) ?>">
                 กลับ </a>
         </div>
         <?php ActiveForm::end(); ?> 
-
-        <!--<?php $form = ActiveForm::begin([
-            'id' => 'active-form',
-            'action' => ['controller/action'],
-            'options' => [
-                'layout' => 'inline'
-            ],
-        ]); ?>
-        <div class="pull-right">
-            <div class="form-group pull-right">
-                <div class="row">
-                    <div class="col-md-3"><label for="sel1">ปีงบประมาณ:</label></div>
-                    <div class="col-md-6">
-                        <select class="form-control" name="budget" id="sel1">
-                            <option value="">--เลือกปีงบประมาณ--</option>
-                            <option value="2558">2558</option>
-                            <option value="2559">2559</option>
-                            <option value="2560">2560</option>
-                        </select>
-                    </div>
-                    <div class="col-md-3">
-                        <button class="btn btn-small btn-success" href="<?= yii\helpers\Url::to(['report/chscrkidneyamp']) ?>">กลับ </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <?php ActiveForm::end(); ?>-->
-        
+  
     <hr>
 </div>
         <div style="display: none">
@@ -81,90 +54,88 @@ $this->title = ':: DMHT Screen Kidney ::';
         </div>
 
         <div class="col-md-12 col-xs-12">
-                        
             <div id="charthtscramp">
-
                 <?php
-                $sql = "$sql";
-                $rawData = Yii::$app->db->createCommand($sql)->queryAll();
-                $main_data=[];
-                //วน loop เก็บข้อมูล ลง Array
-                foreach ($rawData as $data) {
-                        $main_data[] = [
-                            'name' => $data['areaname'],
-                            'y' => $data['p'] * 1,
-                            //'drilldown' => $data['areacode']
-                        ];
-                }
-                $main = json_encode($main_data)
-
-            ?>
+                    $sql = "$sql";
+                    $rawData = Yii::$app->db->createCommand($sql)->queryAll();
+                    $main_data=[];
+                    //วน loop เก็บข้อมูล ลง Array
+                    foreach ($rawData as $data) {
+                            $main_data[] = [
+                                'name' => $data['areaname'],
+                                'y' => $data['p'] * 1,
+                                //'drilldown' => $data['areacode']
+                            ];
+                    }
+                    $main = json_encode($main_data)
+                ?>
 
             <?php    
-            $this->registerJs("$(function () {
-                    // Create the chart
-                    $('#charthtscramp').highcharts({
-                chart: {
-                    type : 'column',
-                    borderWidth: 0,
-                    borderRadius: 0,
-                    backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || '#EEE',
-                    options3d: {
-                                enabled: true,
-                                alpha: 45,
-                                beta: 0
-                }
-                },
-                title: {
-                    text: '',
-                    style : {
-                                    fontFamily : 'Conv_ThaiSansNeue-Bold'
-                            }
-                },
-                xAxis: {
-                    type: 'category',
-                    style : {
-                                    fontFamily : 'Conv_ThaiSansNeue-Bold'
-                            }
-                },
-                yAxis: {
-                    title: {
-                        text: 'ร้อยละ',
-                        style : {
-                                    fontFamily : 'Conv_ThaiSansNeue-Bold'
-                            }
+                $this->registerJs("$(function () {
+                        // Create the chart
+                        $('#charthtscramp').highcharts({
+                    chart: {
+                        type : 'column',
+                        borderWidth: 0,
+                        borderRadius: 0,
+                        backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || '#EEE',
+                        options3d: {
+                                    enabled: true,
+                                    alpha: 45,
+                                    beta: 0
                     }
-                },
-                credits: {
-                        enabled: false
+                    },
+                    title: {
+                        text: '',
+                        style : {
+                                        fontFamily : 'Conv_ThaiSansNeue-Bold'
+                                }
+                    },
+                    xAxis: {
+                        type: 'category',
+                        style : {
+                                        fontFamily : 'Conv_ThaiSansNeue-Bold'
+                                }
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'ร้อยละ',
+                            style : {
+                                        fontFamily : 'Conv_ThaiSansNeue-Bold'
+                                }
+                        }
+                    },
+                    credits: {
+                            enabled: false
+                        },
+
+                    legend: {
+                        enabled: true
                     },
 
-                legend: {
-                    enabled: true
-                },
-
-                plotOptions: {
-                    series: {
-                        borderWidth: 0,
-                        dataLabels: {
-                            enabled: true
+                    plotOptions: {
+                        series: {
+                            borderWidth: 0,
+                            dataLabels: {
+                                enabled: true
+                            }
                         }
-                    }
-                },
+                    },
 
-                series: [{
-                        name: 'ร้อยละ',
-                            colorByPoint: true,
-                            data: $main
-                        }
-                    ],
-                    
-                });
-            });", yii\web\View::POS_END);
-        ?>
+                    series: [{
+                            name: 'ร้อยละ',
+                                colorByPoint: true,
+                                data: $main
+                            }
+                        ],
+
+                    });
+                });", yii\web\View::POS_END);
+            ?>
             </div>
     </div>
-    
+        <p> A หมายถึง จำนวนผู้ป่วยโรคเบาหวานและหรือโรคความดันโลหิตสูง ที่ยังไม่มีภาวะแทรกซ้อนทางไตในเขตรับผิดชอบ ที่ได้รับการตรวจคัดกรอง<br>
+        B หมายถึง จำนวนผู้ป่วยโรคเบาหวานและหรือโรคความดันโลหิตสูง ที่ยังไม่มีภาวะแทรกซ้อนทางไตในเขตรับผิดชอบ</p>
     <!--Left Page-->
     <div class="col-md-12 col-xs-12">
         <div class="body-content">
@@ -176,7 +147,7 @@ $this->title = ':: DMHT Screen Kidney ::';
                     'hover' => TRUE,
                     'panel'=>['type'=>'primary', 
                         'heading'=>'ร้อยละของผู้ป่วย DM, HT ที่ได้รับการค้นหาและคัดกรองโรคไตเรื้อรัง'],
-                    'summary'=>'',
+                    'summary' => '',
                     'beforeHeader'=>[
                         [
                             'columns'=>[
@@ -209,7 +180,7 @@ $this->title = ':: DMHT Screen Kidney ::';
                                 $areacode = $data['areacode']; // ประกาศรับค่าตัวแปรจาก Controller
                                 $areaname = $data['areaname']; // ประกาศรับค่าตัวแปรจาก Controller
                             return Html::a(Html::encode($areaname), ['/report/chscrkidneyhos', 'areacode' => $areacode]);
-                            return empty($data['areaname']) ? '-' : $data['areaname'];
+                            //return empty($data['areaname']) ? '-' : $data['areaname'];
                             }
                         ],
                         [
@@ -333,6 +304,19 @@ $this->title = ':: DMHT Screen Kidney ::';
                 ]);
                 ?>
         </div>
+        <p>    หมายเหตุ :: <br>
+                B = ผู้ป่วยโรคเบาหวานและหรือความดันโลหิตสูงสัญชาติไทย ในเขตรับผิดชอบที่ไม่มีภาวะแทรกซ้อนทางไต<br>
+                <br>
+                   ประมวลผลจาก ผู้ป่วยรหัสโรคเป็น (E10* ถึง E14*) ลบออกด้วย (E102, E112, E122, E132, E142) <br>
+                และ/หรือ มีรหัสโรคเป็น (I10* ถึง I15*) ลบออกด้วย (I12*, I13*,I151) และไม่มีรหัสโรค N181-189 <br>
+                ******ผู้ป่วยที่มีภาวะแทรกซ้อนก่อนปีงบประมาณปัจจุบัน จึงจะนำมาหักออกเท่านั้น<br>
+                <br>
+                A = ผู้ป่วยตาม B ที่ได้รับการตรวจคัดกรอง คือ ตรวจ LABTEST12 หรือ LABTEST14 หรือ LABTEST11 หรือ LABTEST15<br>
+                <br>
+                โดยประเมินจากวันที่ตรวจในปีงบประมาณเท่านั้น (ไม่ดูผลการตรวจ)<br>
+                *******หากมีการตรวจ LAB มากกว่าหนึ่งรายการ จะนับเป็นผลงานในไตรมาสที่วันที่ตรวจน้อยที่สุดเพียงครั้งเดียวเท่านั้น<br>
+
+                +++ใช้แฟ้ม Chronic,Diagnosis_OPD ,Diagnosis_IPD,LABFU , Person และ Home ประมวลผล) </p>
     </div>
 </div>
 

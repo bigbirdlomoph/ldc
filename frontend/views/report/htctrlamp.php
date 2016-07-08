@@ -12,55 +12,26 @@ $this->title = ':: HT Control ::';
 <div class="col-md-12 col-xs-12" style="margin-top : 80px;">
     <h4 class="pull-left">ร้อยละผู้ป่วยโรคความดันโลหิตสูงที่ควบคุมความดันฯ ได้ดี</h4>
        <div class="pull-right">
-           <!--<?php $form = ActiveForm::begin([
+           <?php $form = ActiveForm::begin([
                 'id' => 'active-form',
-                'action' => ['controller/action'],
-                'options' => [
-                    'layout' => 'inline'
-                ],
-            ]); ?>
-            <div class="pull-right">
-                <div class="form-group pull-right">
-                    <div class="row">
-                        <div class="col-md-3"><label for="sel1">ปีงบประมาณ:</label></div>
-                        <div class="col-md-6">
-                            <select class="form-control" name="name" id="sel1">
-                                <option value="">--เลือกปีงบประมาณ--</option>
-                                <option value="2014-10-01' AND '2015-09-30" href="<?= yii\helpers\Url::to(['report/htctrl']) ?>">2558</option>
-                                <option value="2015-10-01' AND '2016-09-30" href="<?= yii\helpers\Url::to(['report/htctrl']) ?>">2559</option>
-                                <option value="2016-10-01' AND '2017-09-30" href="<?= yii\helpers\Url::to(['report/htctrl']) ?>">2560</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6">
-                            <a class="btn btn-small btn-success" href="<?= yii\helpers\Url::to(['report/htctrl']) ?>" type="submit">ตกลง </a>
-                            <a class="btn btn-small btn-success" href="<?= yii\helpers\Url::to(['report/htctrl']) ?>">กลับ </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <?php ActiveForm::end(); ?> -->
-           
-        
-        <?php $form = ActiveForm::begin([
-                'id' => 'active-form',
-                'action' => ['controller/action'],
+                'action' => ['report/htctrlamp'],
                 'options' => [
                     'layout' => 'inline'
                 ],
             ]); ?>
         <div class="btn-group">
-            <button type="button" class="btn btn-small btn-success">เลือกปีงบประมาณ</button>
+            <button type="button" class="btn btn-small btn-success" id="sel1">เลือกปีงบประมาณ</button>
             <button type="button" class="btn btn-small btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="false" aria-expanded="true">
               <span class="caret"></span>
               <span class="sr-only">Toggle Dropdown</span>
             </button>
             <ul class="dropdown-menu">
-              <li><a value="2014-10-01' AND '2015-09-30" href="<?= yii\helpers\Url::to(['report/htctrl']) ?>" type="submit">2558</a></li>
-              <li><a value="2015-10-01' AND '2016-09-30" href="<?= yii\helpers\Url::to(['report/htctrl']) ?>" type="submit">2559</a></li>
-              <li><a value="2016-10-01' AND '2017-09-30" href="<?= yii\helpers\Url::to(['report/htctrl']) ?>" type="submit">2560</a></li>
+              <li><a href="<?= yii\helpers\Url::to(['report/htctrlamp','budget'=>2558]) ?>" type="submit">2558</a></li>
+              <li><a href="<?= yii\helpers\Url::to(['report/htctrlamp','budget'=>2559]) ?>" type="submit">2559</a></li>
+              <li><a href="<?= yii\helpers\Url::to(['report/htctrlamp','budget'=>2560]) ?>" type="submit">2560</a></li>
             </ul>
         </div>
-        <a class="btn btn-small btn-success" href="<?= yii\helpers\Url::to(['report/htctrl']) ?>">
+        <a class="btn btn-small btn-success" href="<?= yii\helpers\Url::to(['report/htctrlamp']) ?>">
         กลับ </a>
         </div>
         <?php ActiveForm::end(); ?>
@@ -83,7 +54,7 @@ $this->title = ':: HT Control ::';
             ?>
         </div>
 
-        <div class="col-md-7 col-xs-7">
+        <div class="col-md-12 col-xs-12">
                         
             <div id="charthtctrlamp">
 
@@ -185,9 +156,10 @@ $this->title = ':: HT Control ::';
         ?>
             </div>
     </div>
-    
+<p> B หมายถึง จำนวนผู้ป่วยโรคความดันโลหิตสูง <br>
+        A หมายถึง จำนวนผู้ป่วยโรคความดันโลหิตสูงที่ควบคุมความดันโลหิตได้ดี</p>
     <!--Left Page-->
-    <div class="col-md-5 col-xs-5">
+    <div class="col-md-12 col-xs-12">
         <div class="body-content">
             <?php
                 if (isset($dataProvider))
@@ -217,7 +189,7 @@ $this->title = ':: HT Control ::';
                             $areacode = $data['areacode']; // ประกาศรับค่าตัวแปรจาก Controller
                             $areaname = $data['areaname']; // ประกาศรับค่าตัวแปรจาก Controller
                             return Html::a(Html::encode($areaname), ['/report/htctrlhos', 'areacode' => $areacode]);
-                            return empty($data['areaname']) ? '-' : $data['areaname'];
+                            //return empty($data['areaname']) ? '-' : $data['areaname'];
                             }
                         ],
                         [
@@ -226,7 +198,8 @@ $this->title = ':: HT Control ::';
                             'options' => ['style' => 'width:30px;'],
                             'attribute' => 'target',
                             'header' => 'เป้าหมาย',
-                            'format'=>['decimal', 0],
+                            //'format'=>['decimal', 0],
+                            'format' => 'raw',
                             'value' => function($data) {
                                 return empty($data['target']) ? '-' : $data['target'];
                             }
@@ -237,7 +210,8 @@ $this->title = ':: HT Control ::';
                             'options' => ['style' => 'width:30px;'],
                             'attribute' => 'result',
                             'header' => 'ผลงาน',
-                            'format'=>['decimal', 0],
+                            //'format'=>['decimal', 0],
+                            'format' => 'raw',
                             'value' => function($data) {
                                 return empty($data['result']) ? '-' : $data['result'];
                             }

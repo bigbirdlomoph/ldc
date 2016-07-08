@@ -10,7 +10,7 @@ use yii\helpers\Url;
 use yii\helpers\ArrayHelper;
 use frontend\models\Cbyear;
 
-$this->title = 'Loei Data';
+$this->title = 'Loei HDC';
 ?>
 <div class="site-index" style="margin-top: 80px">
     <div class="col-sm-12">
@@ -375,11 +375,11 @@ $dir_web = Yii::$app->request->BaseUrl;
 $this->registerJsFile($dir_web . '/js/chart-donut.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 ?>
 
-<div class="row"></div>
+<!--<div class="row"></div>
 <div>
     <a class="btn btn-small btn-danger" href="<?= yii\helpers\Url::to(['site/login']) ?>">
         เข้าสู่ระบบ
     </a>
-</div>
+</div>-->
 
 </div>
